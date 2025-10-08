@@ -1,0 +1,294 @@
+Skip to content
+ 
+Search Gists
+Search...
+All gists
+Back to GitHub
+@santoshpy
+santoshpy/.gitignore
+Last active 4 months ago • Report abuse
+Code
+Revisions
+6
+Stars
+60
+Forks
+24
+Clone this repository at &lt;script src=&quot;https://gist.github.com/santoshpy/6f982faf1eacdac153ffd86a3a694239.js&quot;&gt;&lt;/script&gt;
+<script src="https://gist.github.com/santoshpy/6f982faf1eacdac153ffd86a3a694239.js"></script>
+gitignore file for django project
+.gitignore
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# C extensions
+*.so
+
+# Distribution / packaging
+.Python
+env/
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# PyInstaller
+#  Usually these files are written by a python script from a template
+#  before PyInstaller builds the exe, so as to inject date/other infos into it.
+*.manifest
+*.spec
+
+# Installer logs
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Unit test / coverage reports
+htmlcov/
+.tox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+.hypothesis/
+
+# Translations
+*.mo
+*.pot
+
+# Django stuff:
+*.log
+local_settings.py
+
+# Flask stuff:
+instance/
+.webassets-cache
+
+# Scrapy stuff:
+.scrapy
+
+# Sphinx documentation
+docs/_build/
+
+# PyBuilder
+target/
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# pyenv
+.python-version
+
+# celery beat schedule file
+celerybeat-schedule
+
+# SageMath parsed files
+*.sage.py
+
+# dotenv
+.env
+
+# virtualenv
+.venv
+venv/
+ENV/
+.vscode
+# Spyder project settings
+.spyderproject
+.spyproject
+
+# Rope project settings
+.ropeproject
+
+# mkdocs documentation
+/site
+
+# mypy
+.mypy_cache/
+
+.DS_Store
+*.sqlite3
+media/
+*.pyc
+*.db
+*.pid
+
+# Ignore Django Migrations in Development if you are working on team
+
+# Only for Development only
+# **/migrations/**
+# !**/migrations
+# !**/migrations/__init__.py
+@bouwehand
+bouwehand commented on Aug 6, 2020
+nice! tnx!
+
+ghost commented on Aug 8, 2020
+Great. Thanks for the file.
+
+@ayush-mandowara-bst
+ayush-mandowara-bst commented on Aug 8, 2020
+Hi, why do you have migrations in your .gitignore file?
+
+@santoshpy
+Author
+santoshpy commented on Aug 8, 2020
+Hi, why do you have migrations in your .gitignore file?
+
+if you are working on the git and sometimes you get a lot of git issues due to migration conflicts in development. It's not recommended for production.
+
+@opeerator
+opeerator commented on Aug 12, 2020
+Migration files are part of the code base and should be committed.
+
+@santoshpy
+Author
+santoshpy commented on Aug 14, 2020
+Migration files are part of the code base and should be committed.
+
+Hello @opeerator
+
+I agree but in some cases, due to migration conflict, I chose to ignore it.
+
+@anton-adamiv
+anton-adamiv commented on Aug 21, 2020
+Hello @santoshpurbey
+What about data migrations?
+
+@iamnur
+iamnur commented on Aug 22, 2020
+Awesome
+
+@santoshpy
+Author
+santoshpy commented on Aug 24, 2020
+Hello @santoshpurbey
+What about data migrations?
+
+Thank you for pointing import stuff about database migrations, I've created this gist for my use-case where I've faced migrations issue while working with git so I put it in git ignore file but aware of this and only useful for development environment but not for production where we need the most. Interesting fact: unexpectedly this gist appeared on top in google search.
+
+@bphariharan1301
+bphariharan1301 commented on Sep 29, 2020
+I have named my virtualenv in a different way like Eg: blogenv. So, how can I add that to gitignore file??
+Can anyone help me out Please.....
+
+@shahid-ullah
+shahid-ullah commented on Oct 3, 2020 • 
+@bphariharan1301
+
+I have named my virtualenv in a different way like Eg: blogenv. So, how can I add that to gitignore file??
+Can anyone help me out Please.....
+
+blogenv/
+
+@MrKyHn1
+MrKyHn1 commented on Jan 8, 2021
+Hello, i have site-packages and py_cache files, should i ignore them on my gitignore, besides poluting my git status i feel like it is not necessary files, they should only remain on the user's side. What do you guys think ?
+
+@MrKyHn1
+MrKyHn1 commented on Jan 8, 2021
+to be more precise they are /py_cache files and venv/lib/python/site-packages/ but i notice that you ignore the venv folder , we use a common venv in my team to not flood our machines and it works fine
+
+@ayush-mandowara-bst
+ayush-mandowara-bst commented on Jan 8, 2021 via email 
+What do you mean by common venv? In general, you should ignore your
+environment and only keep a requirements.txt file in tracking.
+
+I'll explicitly state how you can create a requirements file.
+
+1. Activate your environment
+2. pip freeze > requirements.txt
+
+In your gitignore just add
+<name of environment>/
+
+And now add this to tracking
+3. git add requirements.txt .gitignore
+4. git commit -m 'adding requirements'
+5. git push origin master
+
+Now anyone who pulls the repo can (optionally) create their own environment
+and install the requirements using
+
+pip install -r requirements.txt
+
+Hope this helps!
+…
+@MrKyHn1
+MrKyHn1 commented on Jan 8, 2021
+I mean the venv is on the repo when you clone it. I am gonna remove it like suggested, but i would like to make a script to create the venv( i mean the activate/deactivate/... Binaries and so on)
+
+@ayush-mandowara-bst
+ayush-mandowara-bst commented on Jan 8, 2021 via email  • 
+I do it all the time. I mostly use windows. Here's my bat file that does
+some stuff for me:
+
+```
+@echo off
+py -m venv env
+type nul > env.bat
+echo cd env\Scripts >> env.bat
+echo call activate.bat >> env.bat
+echo cd ..\.. >> env.bat
+call env.bat
+```
+
+I have added the location of this bat file in my Environment variables.
+Then I call it in whichever folder I want to create a new environment.
+…
+@MrKyHn1
+MrKyHn1 commented on Jan 8, 2021
+Thanks a lot! Have a nice evening :)
+
+@BukhosiMoyo
+BukhosiMoyo commented on Jan 21, 2021
+Thank you so much this is really helpful...
+
+@ilyas-shah
+ilyas-shah commented on Feb 7, 2021
+thanks!
+
+@VladimirChukavin
+VladimirChukavin commented on Jan 21, 2022
+It's great, thanks!
+
+@zamaniamin
+zamaniamin commented on Apr 1, 2023
+Thanks it is really useful!
+
+@AlexKozhanov
+AlexKozhanov commented on Jun 17
+Hi, thanks!
+
+@hamza211200
+Comment
+ 
+Leave a comment
+ 
+Footer
+© 2025 GitHub, Inc.
+Footer navigation
+Terms
+Privacy
+Security
+Status
+Community
+Docs
+Contact
+Manage cookies
+Do not share my personal information
