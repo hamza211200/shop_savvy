@@ -39,7 +39,7 @@ def login_user(request):
                 }
                 token = jwt.encode(payload, settings.JWT_SECRET, algorithm=settings.JWT_ALGORITHM)
 
-                return {"token": token}
+                return {"token": token, "user" : {"id" : user.id,  "name" : f"{user.first_name} {user.last_name}","email" : user.email}}
             else:
                 return {"error": "Invalid credentials"}
 
